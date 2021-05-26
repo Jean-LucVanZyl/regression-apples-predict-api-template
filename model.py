@@ -48,7 +48,8 @@ def _preprocess_data(data):
     # Convert the json string to a python dictionary object
     feature_vector_dict = json.loads(data)
     # Load the dictionary as a Pandas DataFrame.
-    feature_vector_df = pd.DataFrame.from_dict([feature_vector_dict])
+    
+    df = pd.DataFrame.from_dict([feature_vector_dict])
 
     # ---------------------------------------------------------------
     # NOTE: You will need to swap the lines below for your own data
@@ -60,13 +61,8 @@ def _preprocess_data(data):
 
     # ----------- Replace this code with your own preprocessing steps --------
     
-
-    feature_vector_df = feature_vector_df[(feature_vector_df['Commodities'] == 'APPLE GOLDEN DELICIOUS')]
-    predict_vector = feature_vector_df[['Total_Qty_Sold','Stock_On_Hand']]
-                                
-    # ------------------------------------------------------------------------
-
-    return predict_vector
+    df = df[df['Commodities']=='APPLE GOLDEN DELICIOUS']
+    predict_vector = df[['High_Price','Total_Kg_Sold','Total_Qty_Sold','Weight_Kg','Low_Price','Sales_Total','Stock_On_Hand']]
 
 def load_model(path_to_model:str):
     """Adapter function to load our pretrained model into memory.
